@@ -1,0 +1,50 @@
+1. Configurar el url
+application/config/config.php
+$config['base_url'] = "http://localhost/Help/Herramientas/otros/FrameworksCrud/CodeIgniter_2.1.0/"
+$config['encryption_key']= valorRandom
+2. La base de datos
+application/config/database.php
+db['default']['hostname'] = 'localhost';
+$db['default']['username'] = '';
+$db['default']['password'] = '';
+$db['default']['database'] = '';
+3. Welcome to CodeIgniter! "http://localhost/Help/Herramientas/otros/FrameworksCrud/CodeIgniter_2.1.0/"
+4. importante sobre la url
+aplicacioncodeiginter.com/index.php/facturacion/editarempresa/5610 
+    4.1 aplicacioncodeiginter.com es el nombre del supuesto dominio donde tenemos CodeIgniter instalado.
+    4.2 facturacion es el nombre del controlador que se encargará de procesar la solicitud.
+    4.3 editarempresa es el nombre de la función que habrá dentro del controlador y donde estará el código que ejecute y genere la página. Aunque para ser correctos, como el controlador está en programación orientada a objetos, en vez de función, deberíamos llamarle método.
+    4.4 Por último, 5610, es el parámetro que se le pasa a la función editarempresa, que servirá en este caso para que editarempresa sepa cuál es la empresa que se desea editar. Si queremos o necesitamos enviar varios parámetros a esta función, y no sólo el identificador de la empresa a editar, podremos colocarlos a continuación, separados por barras.
+5. Se elimina el acceso al index.php generando un archivo .htacces
+RewriteEngine on
+RewriteCond $1 !^(index.php|css|js|images|robots.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+#si tuviéramos CodeIgniter instalado en un subdirectorio de nuestro dominio, por ejemplo, en el subdirectorio "carpeta"
+#RewriteRule ^(.*)$ /carpeta/index.php/$1 [L]
+ 5.1 modificar el config //$config['index_page'] = '';
+6. Controlador se genera en la carpeta application/controllers/usuario.php
+se llama desde "http://localhost/Help/Herramientas/otros/FrameworksCrud/CodeIgniter_2.1.0/usuario/"
+7. Si se quiere dejar como el index entonces se configura en application/config/routes.php 
+$route['default_controller'] = "usuario";
+8. Para manejo de las url y metodos ejemplo:
+dominio.com/index.php/productos/perifericos/raton_genius
+function perifericos($modelo){
+   echo 'Estás viendo el periférico ' . $modelo;
+}
+9. Vista
+se cargan con $this -> load -> view('usuario/usuario_listado');
+se puede guardar la vista en una variable $cadena = $this->load->view('mivista', '', true);
+10. Modelo se ponen en system/application/models/nombre_model.php 
+La base es el constructor
+class Nombre_model extends Model {
+   function __construct(){
+      parent::Model();
+   }
+}
+se carga el modelo $this->load->model('Nombre_model'); 
+se configura el acceso de la base de datos application/config/autoload.php $autoload['libraries'] = array('database');
+
+//accedes a la base de datos http://codeigniter.com/user_guide/database/active_record.html
+
+
+
